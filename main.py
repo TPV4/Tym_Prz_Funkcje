@@ -19,7 +19,8 @@ class Menu():
         self.wykres=Button(self.okno, text="utworz wykresy", command=lambda:self.wykresy(self.notes.get()))
         self.wykres.place(x=400, y=200)
         self.wykres["state"]=tk.DISABLED
-        self.wyjscie=Button(self.okno, text="wyjdz", command=lambda:self.okno.destroy()).place(x=400, y=250)  
+        self.wyjscie=Button(self.okno, text="wyjdz", command=lambda:self.okno.destroy()).place(x=400, y=250) 
+        self.tekst=Label(self.okno, text="Dozwolone znaki:\nx - jenda zmienna\nx,y - dwie zmienne\n+, -\n*, /\n^, sqrt()\nsin(), cos(), exp()").place(x=150, y=200)
 
     def czy_poprawne(self, F): ##sprawdza czy wzor funkcji jest poprawny
         self.zmienne=0
