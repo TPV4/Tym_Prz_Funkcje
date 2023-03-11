@@ -81,4 +81,4 @@ class Wykres():
         F=np.array(F)
         return F
     
-# Wykres("x^2+y^2", 2)
+# Wykres("sin(x)+cos(y)", 2)

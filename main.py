@@ -24,25 +24,50 @@ class Menu():
 
     def czy_poprawne(self, F): ##sprawdza czy wzor funkcji jest poprawny
         self.zmienne=0
+        pomocnicza=0
         for i in range(len(F)):
             znak=ord(F[i])
             if znak>96 and znak<123:
-                if not (i+1>len(F) or i+2>len(F)):
+                if pomocnicza>0:
+                    pomocnicza-=1
+                elif not (i+1==len(F) or i+2==len(F)):
                     slowo=F[i]+F[i+1]+F[i+2]
                     if slowo=="sin" or slowo=="cos" or slowo=="exp":
-                        i+=2
-                    elif slowo=="pi":
-                        i+=1
+                        pomocnicza=2
+                    elif slowo[:-1]=="pi":
+                        pomocnicza=1
+                    else:
+                        self.zmienne+=1
+                elif i+1<len(F):
+                    slowo=F[i]+F[i+1]
+                    if slowo=="pi":
+                        pomocnicza=1
                     else:
                         self.zmienne+=1
                 else:
                     self.zmienne+=1
-                if self.zmienne>2:
-                    return False
             elif (znak<40 or znak>57) and znak!=94:
-                return False
-        if self.zmienne!=0:
+                self.wykres["state"]=tk.DISABLED
+                try:
+                    self.blad.destroy()
+                except:
+                    pass
+                self.blad=Label(self.okno, text="bledny wzor")
+                self.blad.place(x=150 ,y=350)
+        if self.zmienne>0 and self.zmienne<3:
             self.wykres["state"]=tk.ACTIVE
+            try:
+                self.blad.destroy()
+            except:
+                pass
+        else:
+            self.wykres["state"]=tk.DISABLED
+            try:
+                self.blad.destroy()
+            except:
+                pass
+            self.blad=Label(self.okno, text="bledny wzor")
+            self.blad.place(x=150 ,y=350)
 
     def wykresy(self, funkcja):
         po.Wykres(funkcja, self.zmienne)
