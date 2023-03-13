@@ -1,0 +1,1 @@
+w folderze "dist" znajduje się plik .exe ryujący wykresy funkcji jednej lub dwóch zmiennych oraz ich pochodnych.
